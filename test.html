@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"/></head><body>
+<h1>Manual Test</h1>
+<div id="root"></div>
+<div id="log" style="background:#eee;padding:10px;font-family:monospace;white-space:pre-wrap;"></div>
+<script>
+var log = document.getElementById('log');
+function addLog(msg) { log.textContent += msg + '\n'; }
+window.onerror = function(msg, src, line, col, err) {
+  addLog('ERROR: ' + msg + ' at ' + src + ':' + line);
+  addLog(err && err.stack || '');
+};
+addLog('Page loaded at ' + new Date().toISOString());
+addLog('Loading JS bundle...');
+var s = document.createElement('script');
+s.src = '/_expo/static/js/web/AppEntry-e83d9779bbf68d0c29b739a25dff6902.js';
+s.onload = function() { addLog('JS bundle loaded successfully'); };
+s.onerror = function() { addLog('FAILED to load JS bundle'); };
+document.head.appendChild(s);
+setTimeout(function() {
+  var root = document.getElementById('root');
+  addLog('After 3s: root has ' + root.children.length + ' children, innerHTML length: ' + root.innerHTML.length);
+  if (root.innerHTML.trim() === '') addLog('WARNING: root is empty!');
+}, 3000);
+</script>
+</body></html>

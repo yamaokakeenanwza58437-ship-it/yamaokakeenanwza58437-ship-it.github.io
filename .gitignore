@@ -1,0 +1,4 @@
+# Server scripts - not needed for GitHub Pages
+server.js
+server.ps1
+*.bat

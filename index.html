@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>儿童英语启蒙</title>
+    <!-- The `react-native-web` recommended style reset: https://necolas.github.io/react-native-web/docs/setup/#root-element -->
+    <style id="expo-reset">
+      /* These styles make the body full-height */
+      html,
+      body {
+        height: 100%;
+      }
+      /* These styles disable body scrolling if you are using <ScrollView> */
+      body {
+        overflow: hidden;
+      }
+      /* These styles make the root element full-height */
+      #root {
+        display: flex;
+        height: 100%;
+        flex: 1;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Use static rendering with Expo Router to support running without JavaScript. -->
+    <noscript>
+      You need to enable JavaScript to run this app.
+    </noscript>
+    <!-- The root element for your Expo app. -->
+    <div id="root"></div>
+  <script>
+    // Expo global polyfill - must be initialized BEFORE the main bundle
+    // because expo-video and expo-audio modules extend globalThis.expo.SharedObject
+    if (!globalThis.expo) {
+      var _listeners = function() {
+        this._events = this._events || {};
+      };
+      _listeners.prototype.addListener = function(e, fn) {
+        this._events[e] = this._events[e] || [];
+        this._events[e].push(fn);
+      };
+      _listeners.prototype.removeListener = function(e, fn) {
+        if (this._events[e]) {
+          this._events[e] = this._events[e].filter(function(f) { return f !== fn; });
+        }
+      };
+      _listeners.prototype.emit = function(e) {
+        var args = Array.prototype.slice.call(arguments, 1);
+        (this._events[e] || []).forEach(function(fn) { fn.apply(null, args); });
+      };
+      globalThis.expo = {
+        EventEmitter: _listeners,
+        NativeModule: function() {},
+        SharedObject: _listeners,
+        SharedRef: function() {},
+        modules: {},
+        uuidv4: function() { return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) { var r = Math.random() * 16 | 0; return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16); }); },
+        uuidv5: function() { return 'xxxxxxxx-xxxx-5xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) { var r = Math.random() * 16 | 0; return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16); }); },
+        getViewConfig: function() { throw new Error('getViewConfig not available'); },
+        reloadAppAsync: function(reason) { window.location.reload(); }
+      };
+    }
+  </script>
+  <script>
+    window.onerror = function(msg, src, line, col, err) {
+      var root = document.getElementById('root');
+      root.innerHTML = '<div style="padding:20px;color:red;font-family:monospace;"><h2>App Error</h2><p>' + msg + '</p><p>' + src + ' line:' + line + '</p><pre>' + (err && err.stack || '') + '</pre></div>';
+      root.style.display = 'block';
+    };
+    window.addEventListener('unhandledrejection', function(e) {
+      var root = document.getElementById('root');
+      root.innerHTML = '<div style="padding:20px;color:red;font-family:monospace;"><h2>Unhandled Promise Rejection</h2><p>' + e.reason + '</p></div>';
+      root.style.display = 'block';
+    };
+    setTimeout(function() {
+      var root = document.getElementById('root');
+      if (root.innerHTML.trim() === '' && root.children.length === 0) {
+        root.innerHTML = '<div style="padding:20px;color:orange;font-family:monospace;"><h2>App rendered nothing</h2><p>The JS bundle loaded but did not render any content. Check console for errors.</p></div>';
+      }
+    }, 5000);
+  </script>
+  <script src="/_expo/static/js/web/AppEntry-e83d9779bbf68d0c29b739a25dff6902.js"></script>
+</body>
+</html>
